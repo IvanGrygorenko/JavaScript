@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Hello</h1>
+
+    <div class="item">
+        <h4>Name</h4>
+        <input class="inp" type="text">
+        <h4>Last Name</h4>
+        <input class="inp2" type="text">
+        <button class="btn">Start</button>
+        <button class="reset-btn">Reset</button>
+    </div>
+
+    <div class="item">
+        <h5>Привіт:<span class="out"></span></h5>
+    </div>
+
+    <script>
+        let inp = document.querySelector('.inp')
+        let inp2 = document.querySelector('.inp2')
+        let btn = document.querySelector('.btn')
+        let resetBtn = document.querySelector('.reset-btn')
+        let out = document.querySelector('.out')
+
+        btn.onclick = () => {
+            out.innerHTML = `${inp.value} ${inp2.value}`
+        }
+
+        resetBtn.onclick = () => {
+            out.innerHTML = '';
+        }
+    </script>
+</body>
+
+</html>
