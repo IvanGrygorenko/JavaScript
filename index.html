@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .item {
+            padding: 20px;
+            margin: 0 0 20px;
+            border: 1px solid;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <div class="item">
+            <h3>Введіть радіус кола</h3>
+            <input class="inp1" type="text" placeholder="Радіус кола">
+            <button class="btn1">Порахувати</button>
+            <h4>Площа окружності: <span class="out1"></span></h4>
+        </div>
+        <div class="item">
+            <h3>Відстань в кілометрах між двома містами</h3>
+            <input class="inp2" type="text" placeholder="Відстань (км)">
+            <input class="inp2_02" type="text" placeholder="Час (год)">
+            <button class="btn2">Порахувати</button>
+            <h4>Швидкість: <span class="out2"></span> км/год</h4>
+        </div>
+        <div class="item">
+            <h3>UAH to USD</h3>
+            <input class="inp3" type="text" placeholder="Доллари">
+
+            <button class="btn3">Порахувати</button>
+            <h4>Ви отримаєте: <span class="out3"></span>$</h4>
+        </div>
+    </div>
+
+
+
+    <script>
+        let inp = document.querySelector('.inp1')
+        let out = document.querySelector('.out1')
+        let btn = document.querySelector('.btn1')
+        let inp2 = document.querySelector('.inp2')
+        let inp2_02 = document.querySelector('.inp2_02')
+        let out2 = document.querySelector('.out2')
+        let btn2 = document.querySelector('.btn2')
+        let inp3 = document.querySelector('.inp3')
+        let out3 = document.querySelector('.out3')
+        let btn3 = document.querySelector('.btn3')
+
+
+
+        btn.onclick = () => {
+            out.innerHTML = `${(Number(inp.value) * Number(inp.value)) * 3.14}`
+        }
+
+
+        btn2.onclick = () => {
+            out2.innerHTML = `${(Number(inp2.value) / Number(inp2_02.value))}`
+        }
+
+        btn3.onclick = () => {
+            out3.innerHTML = `${(Number(inp3.value) / Number(37.52)).toFixed(2)}`
+        }
+
+
+    </script>
+</body>
+
+</html>
