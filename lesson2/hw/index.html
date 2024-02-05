@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .item {
+            padding: 20px;
+            margin: 0 0 20px;
+            border: 1px solid;
+            border-radius: 20px;
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <div class="item">
+            <h3>Введіть обсяг флешки (ГБ)</h3>
+            <input class="inp1" type="text" placeholder="Обсяг флешки">
+            <button class="btn1">Порахувати</button>
+            <h4>Файлів поміститься: <span class="out1"></span></h4>
+        </div>
+        <div class="item">
+            <h3>Скільки шоколадок можна купити</h3>
+            <input class="inp2" type="text" placeholder="Сума грошей (грн)">
+            <input class="inp2_02" type="text" placeholder="Ціна шоколадки (грн)">
+            <button class="btn2">Порахувати</button>
+            <h4>Шоколадок: <span class="out2"></span> шт</h4>
+            <h4>Решта: <span class="out2-2"></span> грн</h4>
+        </div>
+        <div class="item">
+            <h3>Трьохзначне число задом на перед</h3>
+            <input class="inp3" type="text" placeholder="Число">
+
+            <button class="btn3">Перевернути</button>
+            <h4>Число навпаки: <span class="out3"></span></h4>
+        </div>
+        <div class="item">
+            <h3>Сума нарахованих відсотків</h3>
+            <input class="inp4" type="text" placeholder="Сума вкладу">
+            <input class="inp4_01" type="text" placeholder="Процентна ставка">
+
+            <button class="btn4">Порахувати</button>
+            <h4>Сума нарахованих відсотків: <span class="out4"></span></h4>
+        </div>
+    </div>
+
+
+
+    <script>
+        let inp = document.querySelector('.inp1')
+        let out = document.querySelector('.out1')
+        let btn = document.querySelector('.btn1')
+        let inp2 = document.querySelector('.inp2')
+        let inp2_02 = document.querySelector('.inp2_02')
+        let out2 = document.querySelector('.out2')
+        let out2_02 = document.querySelector('.out2-2')
+        let btn2 = document.querySelector('.btn2')
+        let inp3 = document.querySelector('.inp3')
+        let out3 = document.querySelector('.out3')
+        let btn3 = document.querySelector('.btn3')
+        let inp4 = document.querySelector('.inp4')
+        let inp4_01 = document.querySelector('.inp4_01')
+        let btn4 = document.querySelector('.btn4')
+        let out4 = document.querySelector('.out4')
+
+
+
+
+
+
+        btn.onclick = () => {
+            out.innerHTML = `${((Number(inp.value) * 1000) / 825).toFixed(0)}`
+        }
+
+
+        btn2.onclick = () => {
+            out2.innerHTML = `${(Number(inp2.value) / Number(inp2_02.value)).toFixed(0)}`
+            out2_02.innerHTML = `${(Number(inp2.value) % Number(inp2_02.value))}`
+        }
+
+        btn3.onclick = () => {
+
+
+            let vvod = Number(inp3.value);
+            let vvodnavpaki = 0;
+
+            for (let i = 0; i < 3; i++) {
+                let digit = vvod % 10;
+                vvodnavpaki = vvodnavpaki * 10 + digit;
+                vvod = Math.floor(vvod / 10);
+            }
+
+            out3.innerHTML = vvodnavpaki;
+        }
+
+        btn4.onclick = () => {
+            let suma = Number(inp4.value);
+            let procent = Number(inp4_01.value) / 100;
+            let months = 2;
+            let vidsotky = suma * (procent / 12) * months;
+            out4.innerHTML = vidsotky.toFixed(2);
+        }
+
+    </script>
+</body>
+
+</html>
