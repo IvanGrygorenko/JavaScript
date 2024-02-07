@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+
+        <style>
+            .item {
+                padding: 20px;
+                margin: 0 0 20px;
+                border: 1px solid;
+                border-radius: 20px;
+
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <div class="wrapper">
+            <div class="item">
+                <h3>Введіть ваш вік</h3>
+                <input class="inp1" type="text" placeholder="Вік">
+                <button class="btn1">Порахувати</button>
+                <h4>ВІН: <span class="out1"></span></h4>
+            </div>
+            <div class="item">
+                <h3>Введіть число від 0 до 9</h3>
+                <input class="inp2" type="text" placeholder="Число">
+                <button class="btn2">Вивести</button>
+                <h4><span class="out2"></span></h4>
+
+            </div>
+            <div class="item">
+                <h3>Введіть діапазон чисел</h3>
+                <input class="inp3" type="text" placeholder="Число">
+                <input class="inp3_01" type="text" placeholder="Число">
+
+                <button class="btn3">Вивести</button>
+                <h4>Сума: <span class="out3"></span></h4>
+            </div>
+            <div class="item">
+                <h3>Спільний дільник</h3>
+                <input class="inp4" type="text" placeholder="Перше число">
+                <input class="inp4_01" type="text" placeholder="Друге число">
+
+                <button class="btn4">Знайти</button>
+                <h4><span class="out4"></span></h4>
+            </div>
+        </div>
+
+
+
+        <script>
+            let inp = document.querySelector('.inp1')
+            let out = document.querySelector('.out1')
+            let btn = document.querySelector('.btn1')
+            let inp2 = document.querySelector('.inp2')
+            let inp2_02 = document.querySelector('.inp2_02')
+            let out2 = document.querySelector('.out2')
+            let out2_02 = document.querySelector('.out2-2')
+            let btn2 = document.querySelector('.btn2')
+            let inp3 = document.querySelector('.inp3')
+            let inp3_01 = document.querySelector('.inp3_01')
+            let out3 = document.querySelector('.out3')
+            let btn3 = document.querySelector('.btn3')
+            let inp4 = document.querySelector('.inp4')
+            let inp4_01 = document.querySelector('.inp4_01')
+            let btn4 = document.querySelector('.btn4')
+            let out4 = document.querySelector('.out4')
+
+
+
+            btn.onclick = () => {
+                if (+inp.value > 0 && +inp.value <= 11) {
+                    out.innerHTML = "Дитина"
+                } else if (+inp.value >= 12 && +inp.value <= 17) {
+                    out.innerHTML = "Підліток"
+                } else if (+inp.value >= 18 && +inp.value <= 59) {
+                    out.innerHTML = "Дорослий"
+                } else if (+inp.value >= 60) {
+                    out.innerHTML = "Пенсіонер"
+                } else {
+                    out.innerHTML = "Помилка"
+                }
+
+            }
+
+
+            btn2.onclick = () => {
+                if (+inp2.value == 0) {
+                    out2.innerHTML = ')'
+                } else if (+inp2.value == 1) {
+                    out2.innerHTML = '!'
+                } else if (+inp2.value == 2) {
+                    out2.innerHTML = '@'
+                } else {
+                    out2.innerHTML = 'Невірне число'
+                }
+
+
+            }
+
+            btn3.onclick = () => {
+                function suma(start, end) {
+                    let sum = 0;
+                    for (let i = start; i <= end; i++) {
+                        sum += i;
+                    }
+                    return sum;
+                }
+
+                let start = parseInt(inp3.value);
+                let end = parseInt(inp3_01.value);
+                let result = suma(start, end);
+                out3.innerHTML = result
+
+            }
+
+            btn4.onclick = () => {
+
+                function dilnuk(a, b) {
+                    if (!b) {
+                        return a
+                    }
+
+                    return dilnuk(b, a % b)
+                }
+
+                let vivod = dilnuk(inp4.value, inp4_01.value)
+                out4.innerHTML = vivod
+
+            }
+
+        </script>
+    </body>
+
+    </html>
+
+</body>
+
+</html>
