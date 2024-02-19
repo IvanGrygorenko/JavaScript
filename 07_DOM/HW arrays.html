@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        img {
+            width: 100px;
+        }
+
+        .wrap {
+            display: flex;
+        }
+
+        .picture {
+            position: relative;
+        }
+
+        .picture img {
+            display: block;
+            position: sticky;
+            top: 20px;
+            width: 100%;
+        }
+
+        .cart {
+            background-color: bisque;
+            font-size: 30px;
+            padding: 30px;
+            position: fixed;
+            right: 10px;
+            top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <button class="back">Back</button>
+    <div class="wrap">
+
+        <div class="out"></div>
+
+        <div class="picture">
+
+        </div>
+    </div>
+    <div class="cart">
+        0
+    </div>
+
+    <script>
+        const out = document.querySelector('.out')
+        const cart2 = document.querySelector('.cart')
+        const btnBack = document.querySelector('.back')
+        const picture = document.querySelector('.picture')
+        const cars = [
+            {
+                img: 'https://m.media-amazon.com/images/M/MV5BZjRjOTFkOTktZWUzMi00YzMyLThkMmYtMjEwNmQyNzliYTNmXkEyXkFqcGdeQXVyNzQ1ODk3MTQ@._V1_FMjpg_UX1000_.jpg',
+                brand: 'Volkswagen',
+                model: 'Touran',
+                age: 2003,
+                price: 4700,
+                lenght: 267,
+            },
+            {
+                img: 'https://pyxis.nymag.com/v1/imgs/3b7/ca7/5fd3353737d602a5a1caa3fce92cb33b39-rick-morty.1x.rsquare.w1400.jpg',
+                brand: 'Volkswagen',
+                model: 'Passat',
+                age: 2019,
+                price: 12700,
+                lenght: 106,
+            },
+            {
+                img: 'https://media.vanityfair.com/photos/652d49ca252ae42165d7e377/9:16/w_630,h_1120,c_limit/vf1023-rick-morty.png',
+                brand: 'Mersedes',
+                model: 'E',
+                age: 2013,
+                price: 22700,
+                lenght: 267,
+            },
+            {
+                img: 'https://m.media-amazon.com/images/M/MV5BZjRjOTFkOTktZWUzMi00YzMyLThkMmYtMjEwNmQyNzliYTNmXkEyXkFqcGdeQXVyNzQ1ODk3MTQ@._V1_FMjpg_UX1000_.jpg',
+                brand: 'Mersedes',
+                model: 'S',
+                age: 2015,
+                price: 33700,
+                lenght: 67,
+            },
+            {
+                img: 'https://m.media-amazon.com/images/M/MV5BZjRjOTFkOTktZWUzMi00YzMyLThkMmYtMjEwNmQyNzliYTNmXkEyXkFqcGdeQXVyNzQ1ODk3MTQ@._V1_FMjpg_UX1000_.jpg',
+                brand: 'Mazda',
+                model: '6',
+                age: 2010,
+                price: 11700,
+                lenght: 190,
+            },
+            {
+                img: 'https://m.media-amazon.com/images/M/MV5BZjRjOTFkOTktZWUzMi00YzMyLThkMmYtMjEwNmQyNzliYTNmXkEyXkFqcGdeQXVyNzQ1ODk3MTQ@._V1_FMjpg_UX1000_.jpg',
+                brand: 'Mazda',
+                model: '3',
+                age: 2006,
+                price: 3700,
+                lenght: 230,
+            },
+
+
+        ]
+
+        let cart = []
+
+        function showALl() {
+
+            cars.map(item => {
+                let div = document.createElement('div')
+
+
+                let h1 = document.createElement('h1')
+                h1.innerHTML = item.brand
+
+                let img = document.createElement('img')
+                img.src = item.img
+
+                img.onclick = () => {
+                    if (picture.innerHTML.includes(item.img)) {
+                        picture.innerHTML = ''
+                    } else {
+                        picture.innerHTML = `<img src="${item.img}">`
+                    }
+                }
+                let btn = document.createElement('button')
+                btn.innerHTML = "Show All"
+
+                btn.onclick = () => {
+                    out.innerHTML = ''
+                    out.innerHTML = `
+                ${item.brand} <br>
+                ${item.model} <br>
+                ${item.price} <br>
+                
+                `
+                }
+
+                let btnAddCart = document.createElement('button')
+                btnAddCart.innerHTML = "add to Cart"
+                btnAddCart.onclick = () => {
+                    cart.push(item)
+
+                    cart2.innerHTML = cart.length
+                }
+
+                div.append(img, h1, btn, btnAddCart)
+
+                out.append(div)
+            })
+
+        }
+
+        showALl()
+        btnBack.onclick = () => {
+            cart = [];
+            cart2.innerHTML = '0';
+            out.innerHTML = '';
+            showALl();
+        };
+        cart2.onclick = () => {
+            out.innerHTML = '';
+            cart.map((item, itemDiv) => {
+
+                let div = document.createElement('div');
+                let img = document.createElement('img');
+                let brand = document.createElement('h2');
+                let model = document.createElement('h3');
+                let price = document.createElement('h4');
+                let removeCart = document.createElement('button');
+
+
+                img.src = item.img;
+                brand.textContent = item.brand;
+                model.textContent = item.model;
+                price.textContent = item.price;
+                removeCart.textContent = 'X';
+                removeCart.onclick = () => removeDiv(itemDiv);
+
+                div.appendChild(img);
+                div.appendChild(brand);
+                div.appendChild(model);
+                div.appendChild(price);
+                div.appendChild(removeCart);
+
+                out.appendChild(div);
+            });
+        };
+
+
+        function removeDiv(itemDiv) {
+            cart.splice(itemDiv, 1);
+            cart2.innerHTML = cart.length;
+            cart2.onclick();
+        }
+    </script>
+
+</body>
+
+</html>
