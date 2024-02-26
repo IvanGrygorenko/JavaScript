@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        overflow: hidden;
+    }
+
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        color: #fff;
+    }
+
+    .hero {
+        background-color: black;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        width: 100%;
+
+    }
+
+    p {
+        max-width: 350px;
+        margin: 10px 0;
+    }
+
+    img {
+        display: block;
+        width: 100px;
+    }
+
+    .planet {
+        width: 800px;
+        position: absolute;
+        right: 0%;
+        bottom: 10%;
+    }
+
+    .doodle-1 {
+        position: absolute;
+        top: 10%;
+        right: 40%;
+    }
+
+    .doodle-2 {
+        position: absolute;
+        top: 40%;
+        right: 35%;
+    }
+
+    .doodle-3 {
+        position: absolute;
+        top: 75%;
+        right: 40%;
+    }
+</style>
+
+<body>
+
+
+    <section class="hero">
+        <div class="container">
+            <h1>Lorem ipsum dolor </h1>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro quasi blanditiis rem molestias odio
+                officia, quo veritatis quisquam sapiente corrupti.</p>
+            <button>BUTTON</button>
+
+            <img class="planet animation-item" src="./img/planet.png" data-speed="0.1">
+            <img class="doodle-1 animation-item" src="./img/1.png" data-speed="0.3">
+            <img class="doodle-2 animation-item" src="./img/2.png" data-speed="0.4">
+            <img class="doodle-3 animation-item" src="./img/3.png" data-speed="0.5">
+
+        </div>
+
+    </section>
+
+
+
+    <script>
+        let hero = document.querySelector('.hero')
+        let itemAnimation = document.querySelectorAll('.animation-item')
+
+        hero.addEventListener('mousemove', (event) => {
+            let height = hero.offsetHeight / 2
+            itemAnimation.forEach(item => {
+                let speed = item.getAttribute('data-speed')
+
+                item.style.transform = `translate(${event.clientX / 10 * speed}px,${(event.clientY - height) / 10 * speed}px)`
+
+
+            })
+
+
+        })
+
+
+
+    </script>
+
+</body>
+
+</html>

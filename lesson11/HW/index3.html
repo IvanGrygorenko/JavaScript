@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .low {
+            color: green;
+        }
+
+        .middle {
+            color: yellow;
+        }
+
+        .high {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>To Do List</h2>
+    <input class="inp" type="text">
+    <select class="sel">
+        <option value="low">Low</option>
+        <option value="middle">Middle</option>
+        <option value="high">High</option>
+    </select>
+    <button class="btn">Add</button>
+
+    <div class="count">0</div>
+
+    <ul class="out"></ul>
+
+    <script>
+        let inp = document.querySelector('.inp');
+        let sel = document.querySelector('.sel');
+        let btn = document.querySelector('.btn');
+        let out = document.querySelector('.out');
+        let countNew = document.querySelector('.count');
+        let count = 0;
+
+
+        function countCheck() {
+            countNew.textContent = count;
+        }
+
+        function renderItem(item) {
+            let todoItem = document.createElement('li');
+            todoItem.textContent = item.name;
+            todoItem.classList.add(item.priority);
+
+            let delBtn = document.createElement('button');
+            delBtn.textContent = 'X';
+            delBtn.addEventListener('click', () => {
+                todoItem.remove();
+                count--;
+                countCheck();
+            });
+
+            todoItem.append(delBtn);
+            out.append(todoItem);
+        }
+
+
+        btn.addEventListener('click', () => {
+            const newItem = {
+                name: inp.value,
+                priority: sel.value
+            };
+
+            renderItem(newItem);
+            count++;
+            countCheck();
+        });
+
+
+
+    </script>
+</body>
+
+</html>
