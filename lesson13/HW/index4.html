@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #000;
+            font-size: 16px;
+        }
+
+        img {
+            display: block;
+            width: 100%;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .main {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .card {
+            display: grid;
+            grid-template-columns: 150px 2fr;
+            gap: 16px;
+            border: 1px solid blue;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            background-color: aquamarine;
+        }
+
+        .card__content {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .alive {
+            border-color: green;
+        }
+
+        .dead {
+            border-color: red;
+        }
+
+        .pagination-btn {
+            margin: 0 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="container">
+            <main class="main">
+
+            </main>
+            <div class="nav">
+                <button class="prev">Prev</button>
+                <div class="pagination">
+                </div>
+                <button class="next">Next</button>
+
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        let btnNext = document.querySelector('.next')
+        let btnPrev = document.querySelector('.prev')
+        let pagination = document.querySelector('.pagination')
+
+        let currentPage = 1
+        let totalPages = 0
+
+
+        function renderData(page) {
+            fetch(`https://rickandmortyapi.com/api/character?page=${page}`)
+                .then(data => data.json())
+                .then(data => {
+                    render(data.results);
+                    totalPages = data.info.pages;
+                });
+        }
+
+
+        renderData(currentPage)
+
+
+        function render(data) {
+            let main = document.querySelector('.main')
+            main.innerHTML = ''
+            data.map(item => {
+                main.append(createItem(item))
+            });
+        }
+
+
+        function createItem(item) {
+            let div = document.createElement('div')
+            div.classList.add('card')
+
+            let img = document.createElement('img')
+            img.classList.add('card__img')
+            img.src = item.image;
+
+            let content = document.createElement('div')
+            content.classList.add('card__content')
+
+            let h2 = document.createElement('h2')
+            h2.classList.add('card__title')
+            h2.innerHTML = item.name;
+
+            let h5 = document.createElement('h5')
+            h5.classList.add('card__status')
+            h5.innerHTML = item.status;
+
+            let h4 = document.createElement('h4')
+            h4.classList.add('card__spec')
+            h4.innerHTML = item.species
+
+            content.append(h2, h4, h5)
+            div.append(img, content)
+
+            if (item.status === 'Alive') {
+                div.classList.add('alive')
+            } else if (item.status === 'Dead') {
+                div.classList.add('dead')
+            }
+
+            return div;
+        }
+
+
+        function createBtn(totalPages) {
+            pagination.innerHTML = ''
+
+            for (let i = 1; i <= totalPages; i++) {
+                let btn = document.createElement('button')
+                btn.classList.add('pagination-btn')
+                btn.textContent = i
+                btn.addEventListener('click', () => {
+                    currentPage = i
+                    renderData(currentPage)
+                });
+                pagination.append(btn)
+            }
+        }
+
+
+        btnNext.addEventListener('click', () => {
+            if (currentPage < totalPages) {
+                currentPage++
+                renderData(currentPage)
+            }
+        });
+
+
+        btnPrev.addEventListener('click', () => {
+            if (currentPage > 1) {
+                currentPage--
+                renderData(currentPage)
+            }
+        });
+
+
+        fetch('https://rickandmortyapi.com/api/character?page=1')
+            .then(data => data.json())
+            .then(data => {
+                createBtn(data.info.pages)
+            })
+
+    </script>
+</body>
+
+</html>
