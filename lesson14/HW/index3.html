@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <input class="inp" type="text"> <button class="btn">add</button>
+
+    <ol class="out">
+
+    </ol>
+    <div class="count">Всього задач: <span class="span">0</span></div>
+
+    <script>
+        let inp = document.querySelector('.inp')
+        let btn = document.querySelector('.btn')
+        let out = document.querySelector('.out')
+        let span = document.querySelector('.span')
+
+
+        let arr = JSON.parse(localStorage.getItem('tasks')) || []
+
+
+        function render() {
+            out.innerHTML = ''
+            arr.map(item => {
+                let li = document.createElement('li')
+                li.innerHTML = item
+                out.append(li)
+            })
+        }
+
+        function updateCount() {
+            span.innerHTML = arr.length
+        }
+
+        btn.addEventListener('click', () => {
+            let item = inp.value
+            if (item) {
+                arr.push(item)
+                localStorage.setItem('tasks', JSON.stringify(arr))
+                render()
+                updateCount()
+                inp.value = ''
+            }
+        })
+
+        render()
+
+        updateCount()
+    </script>
+</body>
+
+</html>

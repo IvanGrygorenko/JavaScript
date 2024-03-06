@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .dark {
+            background-color: black;
+
+        }
+
+        .light {
+            background-color: rgb(142, 180, 212);
+        }
+    </style>
+</head>
+
+<body class="light">
+
+    <input class="inp" type="checkbox">
+
+
+
+
+    <script>
+        let inp = document.querySelector('.inp')
+        let body = document.querySelector('body')
+
+        body.classList.add(localStorage.getItem('theme'))
+
+
+        inp.addEventListener('change', () => {
+            if (inp.checked) {
+                localStorage.setItem('theme', "dark")
+                body.classList.remove('light')
+                body.classList.add('dark')
+            } else {
+                localStorage.setItem('theme', "light")
+                body.classList.add('light')
+                body.classList.remove('dark')
+            }
+        })
+
+    </script>
+
+</body>
+
+</html>
